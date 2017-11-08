@@ -1,5 +1,4 @@
 import utils.*;
-import java.io.File;
 
 
 public class Character {

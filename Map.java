@@ -1,12 +1,11 @@
 
 import java.util.Random;
-import java.io.File;
 import utils.*;
 public class Map {
 
 	private int[][] mapGrid;
-	private int mapEntranceX = 0;
-	private int mapEntranceY = 1;
+	// private int mapEntranceX = 0;
+	// private int mapEntranceY = 1;
 
 
 	//Constructors
