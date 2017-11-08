@@ -16,7 +16,7 @@ public class Character {
 		this.name = "Isaiah";
 		this.strength = 3;
 		this.maxHealth = 10;
-		this.posX = 0;
+		this.posX = 1;
 		this.posY = 1;
 		this.level = 0;
 		this.items = new int[0];
