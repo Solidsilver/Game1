@@ -44,6 +44,9 @@ public class Map {
 	public int getValueAt(int x, int y) {
 		return this.mapGrid[y][x];
 	}
+	public void setValueAt(int x, int y, int value) {
+		this.mapGrid[y][x] = value;
+	}
 
 	public void saveMap(String dirName) throws Exception {
 		FileUtils.arrayToFile(this.mapGrid, dirName + "/mapDefault");
@@ -64,9 +67,6 @@ public class Map {
 		this.mapGrid = FileUtils.csvToArray(dirName + "/" + levelName);
 	}
 
-	public int valueAt(int x, int y) {
-		return this.mapGrid[y][x];
-	}
 
 
 	public int lookLeft(int x, int y) {

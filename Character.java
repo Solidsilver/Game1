@@ -89,6 +89,9 @@ public class Character {
 	public String getInventory() {
 		return ArrayExtras.arrayToString(this.items);
 	}
+	public int[] getInventoryArray() {
+		return this.items;
+	}
 	public void removeInventory(int numb) throws Exception {
 		this.items = ArrayUtils.remove(this.items, numb);
 	}
@@ -101,6 +104,13 @@ public class Character {
 	}
 	public int getY() {
 		return this.posY;
+	}
+
+	public void setX(int newX) {
+		this.posX = newX;
+	}
+	public void setY(int newY) {
+		this.posY = newY;
 	}
 
 }
