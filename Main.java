@@ -55,8 +55,8 @@ public class Main {
 				System.out.println("You Encounter a wall");
 			} else if (item == 0) {
 				System.out.println("\n");
-				System.out.println("You move " + toDirection(input));
-				movePlayer(input, p1);
+				System.out.println("You walk " + toDirection(input) + " down the hall");
+				movePlayer(input, p1, level1);
 			} else if (item == 2) {
 				int inp2;
 				System.out.println("You encounter a closed door");
@@ -65,13 +65,13 @@ public class Main {
 				if (inp2 == 1) {
 					System.out.println("\n");
 					System.out.println("You open the door, and walk through");
-					movePlayer(input, p1);
+					movePlayer(input, p1, level1);
 					level1.setValueAt(p1.getX(), p1.getY(), 5);
 				} else System.out.println("No Mystery for you...");
 			} else if (item == 5) {
 				System.out.println("\n");
 				System.out.println("You move " + toDirection(input) + " through the open door");
-				movePlayer(input, p1);
+				movePlayer(input, p1, level1);
 			} else if (item == 3) {
 				int inp2;
 				System.out.println("You encounter a locked door");
@@ -81,7 +81,7 @@ public class Main {
 					if (ArrayUtils.linearSearch(p1.getInventoryArray(), 4) > -1) {
 						System.out.println("\n");
 						System.out.println("You take the key out of your pocket,\nUnlock the door, and walk through.");
-						movePlayer(input, p1);
+						movePlayer(input, p1, level1);
 						level1.setValueAt(p1.getX(), p1.getY(), 5);
 					} else {
 						System.out.println("\n");
@@ -91,7 +91,7 @@ public class Main {
 				} else System.out.println("No Mystery for you...");
 			} else if (item == 4) {
 				int inp2;
-				movePlayer(input, p1);
+				movePlayer(input, p1, level1);
 				System.out.println("You find a key at your feet!");
 				System.out.print("1) Pick it up        2) Leave it be\n~~> ");
 				inp2 = kb.nextInt();
@@ -132,9 +132,12 @@ public class Main {
 		} else return "nowhere";
 		
 	}
-	private static void movePlayer(int dir, Character p) {
+	private static void movePlayer(int dir, Character p, Map m) {
 		if (dir == 1) {
-			p.setY(p.getY() + 1);
+			do {
+				p.setY(p.getY() + 1);
+			} while (m.lookForward(p.getX(), p.getY()) == 0 && m.lookLeft(p.getX(), p.getY()) == 1 && (m.lookRight(p.getX(), p.getY())) == 1);
+			
 		} else if (dir == 2) {
 			p.setY(p.getY() - 1);
 		} else if (dir == 3) {
