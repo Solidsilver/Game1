@@ -1,5 +1,6 @@
 # Game1
 Learning how to use objects by creating a text-based adventure game.
+
 Current Capabilities: 
 1) The game is playable on for one level, and can be beaten.
 2) The user is able to exit a partial game, and resume where left off on replay.
