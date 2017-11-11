@@ -6,10 +6,15 @@ import utils.ArrayUtils;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
+		String[] menu = {"Start a new Game", "Continue from last game"};
+		String[] closedDoor = {"Open Door", "Move On"};
+		String[] lockedDoor = {"Unlock Door", "Move On"};
+		String[] findKey = {"Pick it up", "Leave it be"};
 		Save.loadLast();
 		int input = 0;
 		Scanner kb = new Scanner(System.in);
-		System.out.print("Welcome to Object Adventures. Would you like to\n1)Start a new game        2)Continue from last game\n~~> ");
+		displayMenu(menu);
+		// System.out.print("Welcome to Object Adventures. Would you like to\n1)Start a new game        2)Continue from last game\n~~> ");
 		input = kb.nextInt();
 		Map level1;
 		Character p1;
@@ -21,17 +26,18 @@ public class Main {
 			level1 =  new Map("mapDefault");
 			p1 = new Character(Save.currentSave);
 		}
-		
-
+		menu = new String[] {"Move Forward", "Move Back", "Move Left", "Move Right", "Exit Castle"};
+		int[] menuKey = {1, 2, 3, 4, 0};
 
 		// level1.printMap();
 		input = 0;
 		int item = 1;
 		System.out.println("\n\nYou enter an old castle..." + "\n What do you do?\n");
 		do {
-			System.out.print("1) Move Forward        2) Move Back\n" + 
+			displayMenu(menu);
+			/* System.out.print("1) " + menu[0] + "        2) " + menu[1] + "\n" + 
 									 "3) Move Left           4) Move Right\n" + 
-									 "0) Exit Castle\n~~> ");
+									 "0) Exit Castle\n~~> "); */
 			input = kb.nextInt();
 			if (input == 1) {
 				item = level1.lookForward(p1.getX(), p1.getY());
@@ -41,9 +47,9 @@ public class Main {
 				item = level1.lookLeft(p1.getX(), p1.getY());
 			} else if (input == 4) {
 				item = level1.lookRight(p1.getX(), p1.getY());
-			} else if (input != 0) {
+			} else if (input != 5) {
 				System.out.println("Not an option...");
-			} else if (input == 0) {
+			} else if (input == 5) {
 				item = 10;
 			}
 			// System.out.println("Item: " + item);
@@ -60,7 +66,7 @@ public class Main {
 			} else if (item == 2) {
 				int inp2;
 				System.out.println("You encounter a closed door");
-				System.out.print("1) Open door        2) Move on\n~~> ");
+				displayMenu(closedDoor);
 				inp2 = kb.nextInt();
 				if (inp2 == 1) {
 					System.out.println("\n");
@@ -75,7 +81,7 @@ public class Main {
 			} else if (item == 3) {
 				int inp2;
 				System.out.println("You encounter a locked door");
-				System.out.print("1) Unlock it        2) Move on\n~~> ");
+				displayMenu(lockedDoor);
 				inp2 = kb.nextInt();
 				if (inp2 == 1) {
 					if (ArrayUtils.linearSearch(p1.getInventoryArray(), 4) > -1) {
@@ -93,7 +99,7 @@ public class Main {
 				int inp2;
 				movePlayer(input, p1, level1);
 				System.out.println("You find a key at your feet!");
-				System.out.print("1) Pick it up        2) Leave it be\n~~> ");
+				displayMenu(findKey);
 				inp2 = kb.nextInt();
 				if (inp2 == 1) {
 					System.out.println("\n");
@@ -105,12 +111,12 @@ public class Main {
 				System.out.println("The castle door is locked!!!");
 			} else if (item == 9) {
 				System.out.println("You made it through the castle!\nThanks for playing...");
-				input = 0;
+				input = 5;
 			}
 
 
 
-		} while (input != 0);
+		} while (input != 5);
 		Save.saveCurrent(p1, level1);
 		
 		kb.close();
@@ -118,6 +124,17 @@ public class Main {
 		System.out.println("Come again soon.");
 
 		
+	}
+
+	private static void displayMenu(String[] menu) {
+		for (int ix = 0; ix < menu.length; ix++) {
+			if (ix%2 == 0) {
+				System.out.print((ix + 1) + ") " + menu[ix] + "		");
+			} else {
+				System.out.println((ix + 1) + ") " + menu[ix]);
+			}
+		}
+		System.out.print("\n~~> ");
 	}
 
 	public static String toDirection(int dir) {
