@@ -13,7 +13,7 @@ public class Main {
 		Save.loadLast();
 		int input = 0;
 		Scanner kb = new Scanner(System.in);
-		displayMenu(menu);
+		displayMenu(menu, 2);
 		// System.out.print("Welcome to Object Adventures. Would you like to\n1)Start a new game        2)Continue from last game\n~~> ");
 		input = kb.nextInt();
 		Map level1;
@@ -34,10 +34,7 @@ public class Main {
 		int item = 1;
 		System.out.println("\n\nYou enter an old castle..." + "\n What do you do?\n");
 		do {
-			displayMenu(menu);
-			/* System.out.print("1) " + menu[0] + "        2) " + menu[1] + "\n" + 
-									 "3) Move Left           4) Move Right\n" + 
-									 "0) Exit Castle\n~~> "); */
+			displayMenu(menu, 2);
 			input = kb.nextInt();
 			if (input == 1) {
 				item = level1.lookForward(p1.getX(), p1.getY());
@@ -81,7 +78,7 @@ public class Main {
 			} else if (item == 3) {
 				int inp2;
 				System.out.println("You encounter a locked door");
-				displayMenu(lockedDoor);
+				displayMenu(lockedDoor, 2);
 				inp2 = kb.nextInt();
 				if (inp2 == 1) {
 					if (ArrayUtils.linearSearch(p1.getInventoryArray(), 4) > -1) {
@@ -128,10 +125,21 @@ public class Main {
 
 	private static void displayMenu(String[] menu) {
 		for (int ix = 0; ix < menu.length; ix++) {
-			if (ix%2 == 0) {
-				System.out.print((ix + 1) + ") " + menu[ix] + "		");
-			} else {
+			if ((ix+1)%2 == 0) {
 				System.out.println((ix + 1) + ") " + menu[ix]);
+			} else {
+				System.out.print((ix + 1) + ") " + menu[ix] + "		");
+			}
+		}
+		System.out.print("\n~~> ");
+	}
+
+	private static void displayMenu(String[] menu, int columns) {
+		for (int ix = 0; ix < menu.length; ix++) {
+			if ((ix+1)%columns == 0) {
+				System.out.println((ix + 1) + ") " + menu[ix]);
+			} else {
+				System.out.print((ix + 1) + ") " + menu[ix] + "		");
 			}
 		}
 		System.out.print("\n~~> ");
