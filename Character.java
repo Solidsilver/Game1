@@ -65,8 +65,6 @@ public class Character {
 		dat[4] = String.valueOf(this.posY);
 		dat[5] = String.valueOf(this.level);
 		dat[6] = ArrayExtras.arrayToString(this.items);
-		
-
 		FileUtils.arrayToFile(dat, saveName + "/characterDefault");;
 	}
 	public void saveCharacter(String saveName, String charName) throws Exception {
@@ -78,13 +76,9 @@ public class Character {
 		dat[4] = String.valueOf(this.posY);
 		dat[5] = String.valueOf(this.level);
 		dat[6] = ArrayExtras.arrayToString(this.items);
-
 		FileUtils.arrayToFile(dat, saveName + "/" + charName);
 	}
 
-	public int strength() {
-		return this.strength;
-	}
 	public String getInventory() {
 		return ArrayExtras.arrayToString(this.items);
 	}
@@ -101,15 +95,22 @@ public class Character {
 	public int getX() {
 		return this.posX;
 	}
-	public int getY() {
-		return this.posY;
-	}
-
 	public void setX(int newX) {
 		this.posX = newX;
 	}
+	
+	public int getY() {
+		return this.posY;
+	}
 	public void setY(int newY) {
 		this.posY = newY;
+	}
+
+	public int getStrength() {
+		return this.strength;
+	}
+	public void setStrength(int str) {
+		this.strength = str;
 	}
 
 }

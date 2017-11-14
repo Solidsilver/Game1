@@ -66,8 +66,6 @@ public class Map {
 		this.mapGrid = FileUtils.csvToArray(dirName + "/" + levelName);
 	}
 
-
-
 	public int lookLeft(int x, int y) {
 		return this.mapGrid[y][x-1];
 	}

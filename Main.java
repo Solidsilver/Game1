@@ -14,7 +14,6 @@ public class Main {
 		int input = 0;
 		Scanner kb = new Scanner(System.in);
 		displayMenu(menu, 2);
-		// System.out.print("Welcome to Object Adventures. Would you like to\n1)Start a new game        2)Continue from last game\n~~> ");
 		input = kb.nextInt();
 		Map level1;
 		Character p1;
@@ -27,9 +26,8 @@ public class Main {
 			p1 = new Character(Save.currentSave);
 		}
 		menu = new String[] {"Move Forward", "Move Back", "Move Left", "Move Right", "Exit Castle"};
-		int[] menuKey = {1, 2, 3, 4, 0};
+		// int[] menuKey = {1, 2, 3, 4, 0};
 
-		// level1.printMap();
 		input = 0;
 		int item = 1;
 		System.out.println("\n\nYou enter an old castle..." + "\n What do you do?\n");
@@ -49,8 +47,6 @@ public class Main {
 			} else if (input == 5) {
 				item = 10;
 			}
-			// System.out.println("Item: " + item);
-			// System.out.println("CharX: " + p1.getX() + ", CharY: " + p1.getY());
 
 			System.out.println("\n");
 			
