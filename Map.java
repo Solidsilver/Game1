@@ -79,5 +79,21 @@ public class Map {
 		return this.mapGrid[y-1][x];
 	}
 
+	public int lookForward(Character c) throws Exception {
+		int x = c.getX();
+		int y = c.getY();
+		if (c.getDirection() == 0) {
+			return this.mapGrid[y][x+1];
+		} else if (c.getDirection() == 1) {
+			return this.mapGrid[y-1][x];
+		} else if (c.getDirection() == 2) {
+			return this.mapGrid[y][x-1];
+		} else if (c.getDirection() == 3) {
+			return this.mapGrid[y+1][x];
+		} else {
+			throw new Exception("Invalid Direction");
+		}
+	}
+
 
 }

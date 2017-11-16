@@ -7,6 +7,7 @@ public class Character {
 	private int maxHealth;
 	private int posX;
 	private int posY;
+	private int direction;
 	private int level;
 	private int[] items;
 
@@ -17,16 +18,18 @@ public class Character {
 		this.maxHealth = 10;
 		this.posX = 1;
 		this.posY = 1;
+		this.direction = 1;
 		this.level = 0;
 		this.items = new int[0];
 	}
 
-	Character(String nm, int str, int mxH, int x, int y, int lvl, int[] itms) {
+	Character(String nm, int str, int mxH, int x, int y, int dir, int lvl, int[] itms) {
 		this.name = nm;
 		this.strength = str;
 		this.maxHealth = mxH;
 		this.posX = x;
 		this.posY = y;
+		this.direction = dir;
 		this.level = lvl;
 		this.items = itms;
 	}
@@ -38,6 +41,7 @@ public class Character {
 		this.maxHealth = Integer.parseInt(dat[2]);
 		this.posX = Integer.parseInt(dat[3]);
 		this.posY = Integer.parseInt(dat[4]);
+		this.direction = Integer.parseInt(dat[7]);
 		this.level = Integer.parseInt(dat[5]);
 		this.items = ArrayExtras.stringToArray(dat[6]);
 	}
@@ -48,6 +52,7 @@ public class Character {
 		this.maxHealth = Integer.parseInt(dat[2]);
 		this.posX = Integer.parseInt(dat[3]);
 		this.posY = Integer.parseInt(dat[4]);
+		this.direction = Integer.parseInt(dat[7]);
 		this.level = Integer.parseInt(dat[5]);
 		this.items = ArrayExtras.stringToArray(dat[6]);
 	}
@@ -57,23 +62,25 @@ public class Character {
 	}
 
 	public void saveCharacter(String saveName) throws Exception {
-		String[] dat = new String[7];
+		String[] dat = new String[8];
 		dat[0] = this.name;
 		dat[1] = String.valueOf(this.strength);
 		dat[2] = String.valueOf(this.maxHealth);
 		dat[3] = String.valueOf(this.posX);
 		dat[4] = String.valueOf(this.posY);
+		dat[7] = String.valueOf(this.direction);
 		dat[5] = String.valueOf(this.level);
 		dat[6] = ArrayExtras.arrayToString(this.items);
 		FileUtils.arrayToFile(dat, saveName + "/characterDefault");;
 	}
 	public void saveCharacter(String saveName, String charName) throws Exception {
-		String[] dat = new String[7];
+		String[] dat = new String[8];
 		dat[0] = this.name;
 		dat[1] = String.valueOf(this.strength);
 		dat[2] = String.valueOf(this.maxHealth);
 		dat[3] = String.valueOf(this.posX);
 		dat[4] = String.valueOf(this.posY);
+		dat[7] = String.valueOf(this.direction);
 		dat[5] = String.valueOf(this.level);
 		dat[6] = ArrayExtras.arrayToString(this.items);
 		FileUtils.arrayToFile(dat, saveName + "/" + charName);
@@ -111,6 +118,43 @@ public class Character {
 	}
 	public void setStrength(int str) {
 		this.strength = str;
+	}
+
+	public int getDirection() {
+		return this.direction;
+	}
+	public void setDirection(int dir) {
+		if (dir > 3) {
+			this.direction = dir%4;
+		} else if (dir < 0) {
+			setDirection(4 + dir%4);
+		} else {
+			this.direction = dir;
+		}
+	}
+	public void turnRight() {
+		setDirection(this.direction - 1);
+	}
+	public void turnLeft() {
+		setDirection(this.direction + 1);
+	}
+	public void turnAround() {
+		setDirection(this.direction + 2);
+	}
+
+	public void moveForward() throws Exception {
+		int dir = this.direction;
+		if (dir == 0) {
+			this.posX++;
+		} else if (dir == 1) {
+			this.posY--;
+		} else if (dir == 2) {
+			this.posX--;
+		} else if (dir == 3) {
+			this.posY++;
+		} else {
+			throw new Exception("Invalid Direction");
+		}
 	}
 
 }
