@@ -34,18 +34,19 @@ public class Main {
 		do {
 			displayMenu(menu, 2);
 			input = kb.nextInt();
-			if (input == 2) {
-				p1.turnAround();	
+			if (input == 1) {
+				item = level1.lookForward(p1);	
+			} else if (input == 2) {
+				item = level1.lookBack(p1);	
 			} else if (input == 3) {
-				p1.turnLeft();
+				item = level1.lookLeft(p1);
 			} else if (input == 4) {
-				p1.turnRight();
+				item = level1.lookRight(p1);
 			} else if (input != 5) {
 				System.out.println("Not an option...");
 			} else if (input == 5) {
 				item = 10;
 			}
-			item = level1.lookForward(p1);
 			
 
 			System.out.println("\n");
@@ -54,8 +55,8 @@ public class Main {
 				System.out.println("You Encounter a wall");
 			} else if (item == 0) {
 				System.out.println("\n");
-				System.out.println("You walk down the hall");
-				p1.moveForward();
+				movePlayer(input, p1, level1);
+				System.out.println();
 			} else if (item == 2) {
 				int inp2;
 				System.out.println("You encounter a closed door");
@@ -63,14 +64,15 @@ public class Main {
 				inp2 = kb.nextInt();
 				if (inp2 == 1) {
 					System.out.println("\n");
-					System.out.println("You open the door, and walk through");
-					p1.moveForward();
+					System.out.print("You open the door, ");
+					movePlayer(input, p1, level1);
+					System.out.println();
 					level1.setValueAt(p1.getX(), p1.getY(), 5);
 				} else System.out.println("No Mystery for you...");
 			} else if (item == 5) {
 				System.out.println("\n");
-				System.out.println("You move through the open door");
-				p1.moveForward();
+				movePlayer(input, p1, level1);
+				// System.out.println(" through the open door");
 			} else if (item == 3) {
 				int inp2;
 				System.out.println("You encounter a locked door");
@@ -79,8 +81,9 @@ public class Main {
 				if (inp2 == 1) {
 					if (ArrayUtils.linearSearch(p1.getInventoryArray(), 4) > -1) {
 						System.out.println("\n");
-						System.out.println("You take the key out of your pocket,\nUnlock the door, and walk through.");
-						p1.moveForward();
+						System.out.print("You take the key out of your pocket,\nUnlock the door, ");
+						movePlayer(input, p1, level1);
+						System.out.println();
 						level1.setValueAt(p1.getX(), p1.getY(), 5);
 					} else {
 						System.out.println("\n");
@@ -90,8 +93,8 @@ public class Main {
 				} else System.out.println("No Mystery for you...");
 			} else if (item == 4) {
 				int inp2;
-				p1.moveForward();
-				System.out.println("You find a key at your feet!");
+				movePlayer(input, p1, level1);
+				System.out.println(" and find a key at your feet!");
 				displayMenu(findKey);
 				inp2 = kb.nextInt();
 				if (inp2 == 1) {
@@ -153,18 +156,35 @@ public class Main {
 		} else return "nowhere";
 		
 	}
-	private static void movePlayer(int dir, Character p, Map m) throws Exception {
+	private static void movePlayer(int dir, Character c, Map m) throws Exception {
+		System.out.print("You");
 		if (dir == 1) {
-			do {
-				p.moveForward();
-			} while (m.lookForward(p) == 0 && m.lookLeft(p.getX(), p.getY()) == 1 && (m.lookRight(p.getX(), p.getY())) == 1);
-			
+			System.out.print(" ");
 		} else if (dir == 2) {
-			p.setY(p.getY() - 1);
+			c.turnAround();
+			System.out.print(" turn around and ");
 		} else if (dir == 3) {
-			p.setX(p.getX() - 1);
+			c.turnLeft();
+			System.out.print(" turn left and ");
 		} else if (dir == 4) {
-			p.setX(p.getX() + 1);
+			c.turnRight();
+			System.out.print(" turn right and ");
 		}
+		do {
+			c.moveForward();
+		} while (m.lookLeft(c) == 1 && m.lookRight(c) == 1 && m.lookForward(c) == 0);
+		System.out.print("walk forward until you encounter ");
+		int itm;
+		if (m.lookForward(c) != 0 || m.lookForward(c) != 5) {
+			itm = m.lookForward(c);
+			System.out.print(m.getObjectValue(itm) + " ahead, ");
+		} if (m.lookLeft(c) != 1) {
+			itm = m.lookLeft(c);
+			System.out.print(m.getObjectValue(itm) + " on your left, ");
+		} if (m.lookRight(c) != 1) {
+			itm = m.lookRight(c);
+			System.out.print(m.getObjectValue(itm) + " on your right, ");
+		}
+		System.out.println();
 	}
 }
