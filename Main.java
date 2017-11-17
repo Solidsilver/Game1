@@ -21,6 +21,8 @@ public class Main {
 			level1 =  new Map("lvlOne");
 			level1.saveMap(Save.currentSave);
 			p1 = new Character(Save.currentSave, "characterNew");
+			// p1.setX(1);
+			// p1.setY(8);
 		} else {
 			level1 =  new Map("mapDefault");
 			p1 = new Character(Save.currentSave);

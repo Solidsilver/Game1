@@ -4,8 +4,8 @@ import utils.*;
 public class Map {
 
 	private int[][] mapGrid;
-	// private int mapEntranceX = 0;
-	// private int mapEntranceY = 1;
+	private int mapEntranceX = 0;
+	private int mapEntranceY = 1;
 
 
 	//Constructors
@@ -66,6 +66,20 @@ public class Map {
 	}
 	public void setValueAt(int x, int y, int value) {
 		this.mapGrid[y][x] = value;
+	}
+
+	public int getEntranceX() {
+		return this.mapEntranceX;
+	}
+	public void setEntranceX(int x) {
+		this.mapEntranceX = x;
+	}
+
+	public int getEntranceY() {
+		return this.mapEntranceY;
+	}
+	public void setEntranceY(int y) {
+		this.mapEntranceY = y;
 	}
 
 	public void saveMap(String dirName) throws Exception {
