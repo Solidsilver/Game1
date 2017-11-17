@@ -1,7 +1,4 @@
-
-
 import java.util.Scanner;
-
 import utils.ArrayUtils;
 
 public class Main {
