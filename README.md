@@ -5,7 +5,9 @@ the movement controlls contextually aware/adaptable.
 
 Currently: when walking forward(only), it will atuomatically walk to the end of a hall (or until it reaches a door)
 
-ToDo: 
+Done:
 1) Let user know what's happening: when it stops at a door, let the user know why.
-2) Update menu options to be contextually changeable.
-3) Make navigation simpler: It should be clear to the user where they are.
+
+ToDo: 
+1) Update menu options to be contextually changeable.
+2) Make navigation simpler: It should be clear to the user where they are.
