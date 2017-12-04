@@ -3,29 +3,26 @@ import utils.ArrayUtils;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
+		int input = 0;
 		String[] menu = {"Start a new Game", "Continue from last game"};
 		String[] closedDoor = {"Open Door", "Move On"};
 		String[] lockedDoor = {"Unlock Door", "Move On"};
 		String[] findKey = {"Pick it up", "Leave it be"};
-		Save.loadLast();
-		int input = 0;
 		Scanner kb = new Scanner(System.in);
-		displayMenu(menu, 2);
-		input = kb.nextInt();
 		Map level1;
 		Character p1;
+		Save.loadLast();
+		displayMenu(menu, 2);
+		input = kb.nextInt();
 		if (input == 1) {
 			level1 =  new Map("lvlOne");
 			level1.saveMap(Save.currentSave);
 			p1 = new Character(Save.currentSave, "characterNew");
-			// p1.setX(1);
-			// p1.setY(8);
 		} else {
 			level1 =  new Map("mapDefault");
 			p1 = new Character(Save.currentSave);
 		}
-		menu = new String[] {"Walk Forward", "Turn around", "Turn/Move Left", "Turn/Move Right", "Exit Castle"};
-		// int[] menuKey = {1, 2, 3, 4, 0};
+		menu = new String[] {"Walk Forward", "Turn around", "Turn Left", "Turn Right", "Exit Game"};
 
 		input = 0;
 		int item = 1;
@@ -47,7 +44,6 @@ public class Main {
 				item = 10;
 			}
 			
-
 			System.out.println("\n");
 			
 			if (item == 1) {
@@ -71,7 +67,6 @@ public class Main {
 			} else if (item == 5) {
 				System.out.println("\n");
 				movePlayer(input, p1, level1);
-				// System.out.println(" through the open door");
 			} else if (item == 3) {
 				int inp2;
 				System.out.println("You encounter a locked door");
@@ -108,17 +103,10 @@ public class Main {
 				System.out.println("You made it through the castle!\nThanks for playing...");
 				input = 5;
 			}
-
-
-
 		} while (input != 5);
 		Save.saveCurrent(p1, level1);
-		
 		kb.close();
-	
-		System.out.println("Come again soon.");
-
-		
+		System.out.println("Come again soon.");	
 	}
 
 	private static void displayMenu(String[] menu) {
@@ -153,8 +141,8 @@ public class Main {
 		} else if (dir == 4) {
 			return "Right";
 		} else return "nowhere";
-		
 	}
+
 	private static void movePlayer(int dir, Character c, Map m) throws Exception {
 		System.out.print("You");
 		if (dir == 1) {
@@ -169,10 +157,12 @@ public class Main {
 			c.turnRight();
 			System.out.print(" turn right and ");
 		}
+		int steps = 0;
 		do {
 			c.moveForward();
+			steps++;
 		} while (m.lookLeft(c) == 1 && m.lookRight(c) == 1 && m.lookForward(c) == 0);
-		System.out.print("walk forward until you encounter ");
+		System.out.print("walk " + steps + " steps forward until you encounter ");
 		int itm;
 		if (m.lookForward(c) != 0 || m.lookForward(c) != 5) {
 			itm = m.lookForward(c);
