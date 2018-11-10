@@ -1,6 +1,7 @@
 import java.io.File;
 import java.util.Scanner;
 import utils.*;
+import characters.Character;
 
 public class Save {
 

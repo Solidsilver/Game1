@@ -1,7 +1,13 @@
-import utils.*;
+package characters;
+import java.util.ArrayList;
+
+import items.*;
+import utils.ArrayExtras;
+import utils.ArrayUtils;
+import utils.FileUtils;
 
 
-public class Character {
+public abstract class Character {
 	private String name;
 	private int strength;
 	private int maxHealth;
@@ -9,6 +15,7 @@ public class Character {
 	private int posY;
 	private int direction;
 	private int level;
+	ArrayList<Item> holdingItems;
 	private int[] items;
 
 	
@@ -33,6 +40,19 @@ public class Character {
 		this.level = lvl;
 		this.items = itms;
 	}
+
+	Character(String nm, int str, int mxH, int x, int y, int dir, int lvl) {
+		this.name = nm;
+		this.strength = str;
+		this.maxHealth = mxH;
+		this.posX = x;
+		this.posY = y;
+		this.direction = dir;
+		this.level = lvl;
+		this.items = new int[0];
+		this.holdingItems = new ArrayList<Item>();
+	}
+
 
 	Character(String saveName) throws Exception{
 		String[] dat = FileUtils.fileToArray(saveName + "/characterDefault");

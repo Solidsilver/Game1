@@ -1,6 +1,7 @@
 
 import java.util.Random;
 import utils.*;
+import characters.Character;
 public class Map {
 
 	private int[][] mapGrid;

@@ -1,4 +1,7 @@
 import java.util.Scanner;
+
+import characters.Character;
+import characters.Isaiah;
 import utils.ArrayUtils;
 
 public class Main {
@@ -17,10 +20,10 @@ public class Main {
 		if (input == 1) {
 			level1 =  new Map("lvlOne");
 			level1.saveMap(Save.currentSave);
-			p1 = new Character(Save.currentSave, "characterNew");
+			p1 = new Isaiah();
 		} else {
 			level1 =  new Map("mapDefault");
-			p1 = new Character(Save.currentSave);
+			p1 = new Isaiah();
 		}
 		menu = new String[] {"Walk Forward", "Turn around", "Turn Left", "Turn Right", "Exit Game"};
 
