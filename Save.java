@@ -8,7 +8,7 @@ public class Save {
 
 
 	public static void loadSave(String dirName) throws Exception {
-		File save = FileUtils.fileFactory(dirName);
+		// File save = FileUtils.fileFactory(dirName);
 	}
 
 	public static void loadLast() throws Exception {

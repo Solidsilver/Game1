@@ -2,7 +2,7 @@ package utils;
 
 import java.util.Random;
 import java.io.PrintStream;
-import utils.*;
+// import utils.*;
 import java.util.Scanner;
 
 public class ArrayExtras {
@@ -112,7 +112,9 @@ public class ArrayExtras {
 
   public static int[] stringToArray(String str) {
 	int[] nums = new int[0];
-	Scanner ps = new Scanner(str).useDelimiter(",");
+	// Scanner ps = new Scanner(str).useDelimiter(",");
+	Scanner ps = new Scanner(str);
+	ps.useDelimiter(",");
 	while (ps.hasNextInt()) {
 		nums = ArrayUtils.push(nums, ps.nextInt());
 	}

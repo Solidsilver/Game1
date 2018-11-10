@@ -4,8 +4,8 @@ import utils.*;
 public class Map {
 
 	private int[][] mapGrid;
-	// private int mapEntranceX = 0;
-	// private int mapEntranceY = 1;
+	private int mapEntranceX = 0;
+	private int mapEntranceY = 1;
 
 
 	//Constructors
@@ -43,8 +43,43 @@ public class Map {
 	public int getValueAt(int x, int y) {
 		return this.mapGrid[y][x];
 	}
+	public String getObjectValue(int itm) {
+		if (itm == 0) {
+			return "a hall";
+		} else if (itm == 1) {
+			return "a wall";
+		} else if (itm == 2) {
+			return "a closed door";
+		} else if (itm == 3) {
+			return "a locked door";
+		} else if (itm == 4) {
+			return "a key";
+		} else if (itm == 5) {
+			return "an open door";
+		} else if (itm == 7) {
+			return "the castle door";
+		} else if (itm == 9) {
+			return "an exit";
+		} else {
+			return "an Object that does not exist";
+		}
+	}
 	public void setValueAt(int x, int y, int value) {
 		this.mapGrid[y][x] = value;
+	}
+
+	public int getEntranceX() {
+		return this.mapEntranceX;
+	}
+	public void setEntranceX(int x) {
+		this.mapEntranceX = x;
+	}
+
+	public int getEntranceY() {
+		return this.mapEntranceY;
+	}
+	public void setEntranceY(int y) {
+		this.mapEntranceY = y;
 	}
 
 	public void saveMap(String dirName) throws Exception {
@@ -66,8 +101,6 @@ public class Map {
 		this.mapGrid = FileUtils.csvToArray(dirName + "/" + levelName);
 	}
 
-
-
 	public int lookLeft(int x, int y) {
 		return this.mapGrid[y][x-1];
 	}
@@ -79,6 +112,67 @@ public class Map {
 	}
 	public int lookBack(int x, int y) {
 		return this.mapGrid[y-1][x];
+	}
+
+	public int lookForward(Character c) throws Exception {
+		int x = c.getX();
+		int y = c.getY();
+		if (c.getDirection() == 0) {
+			return this.mapGrid[y][x+1];
+		} else if (c.getDirection() == 1) {
+			return this.mapGrid[y-1][x];
+		} else if (c.getDirection() == 2) {
+			return this.mapGrid[y][x-1];
+		} else if (c.getDirection() == 3) {
+			return this.mapGrid[y+1][x];
+		} else {
+			throw new Exception("Invalid Direction");
+		}
+	}
+	public int lookBack(Character c) throws Exception {
+		int x = c.getX();
+		int y = c.getY();
+		if (c.getDirection() == 0) {
+			return this.mapGrid[y][x-1];
+		} else if (c.getDirection() == 1) {
+			return this.mapGrid[y+1][x];
+		} else if (c.getDirection() == 2) {
+			return this.mapGrid[y][x+1];
+		} else if (c.getDirection() == 3) {
+			return this.mapGrid[y-1][x];
+		} else {
+			throw new Exception("Invalid Direction");
+		}
+	}
+	public int lookLeft(Character c) throws Exception {
+		int x = c.getX();
+		int y = c.getY();
+		if (c.getDirection() == 0) {
+			return this.mapGrid[y-1][x];
+		} else if (c.getDirection() == 1) {
+			return this.mapGrid[y][x-1];
+		} else if (c.getDirection() == 2) {
+			return this.mapGrid[y+1][x];
+		} else if (c.getDirection() == 3) {
+			return this.mapGrid[y][x+1];
+		} else {
+			throw new Exception("Invalid Direction");
+		}
+	}
+	public int lookRight(Character c) throws Exception {
+		int x = c.getX();
+		int y = c.getY();
+		if (c.getDirection() == 0) {
+			return this.mapGrid[y+1][x];
+		} else if (c.getDirection() == 1) {
+			return this.mapGrid[y][x+1];
+		} else if (c.getDirection() == 2) {
+			return this.mapGrid[y-1][x];
+		} else if (c.getDirection() == 3) {
+			return this.mapGrid[y][x-1];
+		} else {
+			throw new Exception("Invalid Direction");
+		}
 	}
 
 
